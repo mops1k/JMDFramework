@@ -3,11 +3,9 @@ namespace Framework;
 
 use Framework\Loader\PhpFileLoader as FrameworkPhpFileLoader;
 use Framework\Loader\YamlFileLoader as FrameworkYamlFileLoader;
-use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
-use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -15,9 +13,7 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Yaml\Yaml;
 
 class Core implements HttpKernelInterface
 {
