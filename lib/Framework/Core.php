@@ -8,6 +8,7 @@ use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
@@ -70,7 +71,7 @@ class Core implements HttpKernelInterface
             unset($attributes['_controller'], $attributes['_route']);
             $response = call_user_func_array($controller, $attributes);
         } catch (ResourceNotFoundException $e) {
-            $response = new Response('Не найден!', Response::HTTP_NOT_FOUND);
+            throw new NotFoundHttpException($e->getMessage(), null, Response::HTTP_NOT_FOUND);
         }
 
         return $response;
