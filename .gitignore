@@ -1,0 +1,6 @@
+composer.phar
+/vendor/
+/.idea/
+/.git
+/cache
+/config/config.yml

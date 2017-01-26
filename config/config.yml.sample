@@ -1,0 +1,11 @@
+twig:
+    template_path:  'view/'
+    cache_enabled:  true
+    cache:          'cache/'
+
+doctrine:
+    default:
+        driver:     pdo_mysql
+        user:       root
+        password:   ''
+        dbname:     jmd_framework
