@@ -76,7 +76,10 @@ class Core implements HttpKernelInterface
         return $response;
     }
 
-    public function loadRoutes()
+    /**
+     * @return RouteCollection
+     */
+    public function loadRoutes(): RouteCollection
     {
         $locator = new FileLocator(array(__DIR__));
         $loader = new YamlFileLoader($locator);

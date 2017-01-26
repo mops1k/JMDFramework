@@ -5,6 +5,12 @@ $loader->register();
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Whoops\Run;
+use Whoops\Handler\PrettyPageHandler;
+
+$whoops = new Run();
+$whoops->pushHandler(new PrettyPageHandler);
+$whoops->register();
 
 $request = Request::createFromGlobals();
 $core = new Framework\Core();

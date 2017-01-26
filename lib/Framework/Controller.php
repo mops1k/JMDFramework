@@ -3,6 +3,7 @@ namespace Framework;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\DBAL\ConnectionException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\Setup;
@@ -27,7 +28,7 @@ abstract class Controller
      * @param array $vars
      * @return Response
      */
-    protected function render($path, array $vars = [])
+    protected function render($path, array $vars = []): Response
     {
         $loader = new \Twig_Loader_Filesystem($this->config['twig']['template_path']);
 
@@ -38,9 +39,13 @@ abstract class Controller
         return new Response($twig->render($path, $vars));
     }
 
-    protected function getEntityManager($name = 'default')
+    protected function getEntityManager($name = 'default'): EntityManager
     {
         $path = [ __DIR__ . '/../../src/Entity' ];
+        if (!isset($this->config['doctrine'][$name])) {
+            throw new ConnectionException("No config data for $name manager!");
+        }
+
         $params = $this->config['doctrine'][$name];
 
         $config = Setup::createConfiguration(true);
